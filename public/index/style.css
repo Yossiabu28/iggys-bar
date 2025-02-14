@@ -1,0 +1,197 @@
+/* Global styles */
+body {
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text for contrast */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h1 {
+    color: #fff347; /* Bright yellow for the header */
+    font-size: 3.5rem; /* Fixed size */
+    margin-top: 30px;
+    margin-bottom: 20px;
+    letter-spacing: 4px; /* Slight letter spacing for a more stylish look */
+}
+
+h3 {
+    color: #ddd;
+    font-size: 1.5rem; /* Fixed size */
+    margin-bottom: 40px;
+    font-weight: 300; /* Lighter font weight */
+}
+
+/* Grid Layout for the cocktail list */
+.images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px;
+}
+
+/* Cocktail list styling with responsive grid */
+.cocktail-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    gap: 40px;
+}
+
+.cocktail-list li {
+    background-color: #1c1c1c; /* Dark background for each item */
+    padding: 15px;
+    border-radius: 12px; /* Increased border radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Larger shadow for depth */
+    width: 240px; /* Wider width for each item */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 250px; /* Fixed height for consistency */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
+}
+
+.cocktail-list li img {
+    width: 100%;
+    height: 150px; /* Fixed height for the images */
+    object-fit: cover; /* Ensures the images fill the space without distortion */
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.cocktail-list li button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.cocktail-list li button:hover img {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Hover effect for list items */
+.cocktail-list li:hover {
+    transform: translateY(-10px); /* Slight lift on hover */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7); /* More pronounced shadow on hover */
+}
+
+/* Text inside each list item */
+.cocktail-list li p {
+    color: #bbb;
+    font-size: 1rem; /* Fixed font size for the descriptions */
+    margin-top: 10px;
+    text-align: center;
+    flex-grow: 1; /* Allow text to take remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500; /* Slightly bolder text */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 1024px) {
+    .cocktail-list {
+        grid-template-columns: repeat(3, 1fr); /* 3 items per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .cocktail-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .cocktail-list {
+        grid-template-columns: 1fr; /* 1 item per row on small screens */
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .cocktail-list li {
+        width: 100%; /* Full-width items on small screens */
+    }
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark semi-transparent background */
+    padding-top: 100px;
+    text-align: center;
+}
+
+/* Modal Content Styling */
+.modal-content {
+    background-color: #1c1c1c; /* Dark background for the modal */
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 8px;
+    color: #e0e0e0; /* Light text for contrast */
+}
+
+/* Input and Textarea Styling */
+.modal input, .modal textarea {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #444; /* Darker border color */
+    background-color: #333; /* Dark background for inputs */
+    color: #e0e0e0; /* Light text for inputs */
+}
+
+/* Button Styling */
+.modal button {
+    background-color: #ff9800; /* Bright accent color for the button */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Button Hover Effect */
+.modal button:hover {
+    background-color: #e68900; /* Slightly darker shade of the button color */
+}
+
+/* Close Button (optional) */
+.close {
+    color: #e0e0e0;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}

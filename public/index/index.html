@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Iggy's Bar</title>
+</head>
+<body>
+
+    <h1>Iggy's Bar</h1>
+    <h3>Choose Your Drink</h3>
+
+    <div class="images">
+        <ul class="cocktail-list">
+            <li class="GinandTonic"> 
+                <button id="Gin&Tonic" onclick="openModal('Gin&Tonic')">
+                    <img src="./images/GinandTonic.jpg" alt="Gin and Tonic">
+                </button>
+                <p>Gin&Tonic</p>
+            </li>
+            <li> 
+                <button id="Mojito" onclick="openModal('Mojito')">
+                    <img src="./images/Mojito.jpg" alt="Mojito">
+                </button>
+                <p>Mojito</p>
+            </li>
+            <li> 
+                <button id="Margarita" onclick="openModal('Margarita')">
+                    <img src="./images/Margarita.jpg" alt="Margarita">
+                </button>
+                <p>Margarita</p>
+            </li>
+            <li> 
+                <button id="Daiquiri" onclick="openModal('Daiquiri')">
+                    <img src="./images/Daiquiri.jpg" alt="Daiquiri">
+                </button>
+                <p>Daiquiri</p>
+            </li>
+            <li> 
+                <button id="Jasmine" onclick="openModal('Jasmine')">
+                    <img src="./images/Jasmine.jpg" alt="Jasmine">
+                </button>
+                <p>Jasmine</p>
+            </li>
+            <li> 
+                <button id="basil-smash" onclick="openModal('Basil Smash')">
+                    <img src="./images/basil-smash.jpg" alt="Basil Smash">
+                </button>
+                <p>Basil Smash</p>
+            </li>
+            <li> 
+                <button id="John-Collins" onclick="openModal('John Collins')">
+                    <img src="./images/John Collins.jpg" alt="John Collins">
+                </button>
+                <p>John-Collins</p>
+            </li>
+            <li> 
+                <button id="tom-collins" onclick="openModal('Tom Collins')">
+                    <img src="./images/tom-collins.jpg" alt="Tom Collins">
+                </button>
+                <p>Tom Collins</p>
+            </li>
+        </ul>
+    </div>
+
+    <a href="http://10.0.0.6:4000/">Order list</a>
+
+    <!-- Modal HTML structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h2> You Chosen </h2>
+            <!-- Form with autocomplete enabled -->
+            <form id="orderForm" autocomplete="on">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" autocomplete="name" required>
+
+                <label for="notes">Note:</label>
+                <textarea id="notes" name="notes" placeholder="Enter any notes or preferences..." autocomplete="off"></textarea>
+
+                <button type="button" onclick="submitForm()">Submit</button>
+                <button type="button" onclick="closeModal()">Close</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <!-- Link to the external JavaScript file -->
+    <script>
+        // Open the modal and store the cocktail name for later use
+        function openModal(cocktail) {
+            document.getElementById('myModal').style.display = 'block';
+            document.getElementById('myModal').setAttribute('data-cocktail', cocktail);
+        }
+
+        // Close the modal
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // Submit the order form and save the order data to the server
+        function submitForm() {
+            const cocktail = document.getElementById('myModal').getAttribute('data-cocktail');
+            const name = document.getElementById('name').value;
+            const notes = document.getElementById('notes').value;
+
+            // Create an order object
+            const order = {
+                cocktail: cocktail,
+                name: name,
+                notes: notes
+            };
+
+            // Send the order to the backend using fetch
+            fetch('http://10.0.0.6:3000/submit-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(order)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Confirmation message
+                closeModal();
+            })
+            .catch(error => {
+                console.error('Error submitting order:', error);
+                alert('Error submitting order');
+            });
+        }
+    </script>
+
+
+</body>
+</html>
